@@ -3,7 +3,7 @@ use warnings;
 use lib 't/lib', 'lib';
 
 use Test::Warn;
-use Test::More tests => 10;
+use Test::More tests => 11;
 
 use_ok( 'MooseX::SlaveAttribute' );
 
@@ -28,5 +28,13 @@ use_ok( 'MooseX::SlaveAttribute' );
 
     $l->color( 'burgundy' );
     is $l->line_color,      'ecru',     q{Slaves stop following master when they are set};
+}
+
+{
+    require Bar;
+
+    my $b = Bar->new;
+
+    is $b->background_color, 'red',     q{Slave attributes follow masters in super class};
 }
 
