@@ -1,36 +1,17 @@
+use strict;
+use warnings;
+use lib 't/lib', 'lib';
 
 use Test::Warn;
-use Test::More tests => 9;
+use Test::More tests => 10;
 
 use_ok( 'MooseX::SlaveAttribute' );
 
 {
-    package Line;
-    use Moose;
+    warning_is { require Line }
+       'Attribute border_color has a default and a Slave trait at the same time. Using default.',
+       'A warning is thrown for attribute that have both a Slave trait and a default value';
 
-    has color => (
-        is      => 'rw',
-        default => 'red',
-    );
-    has line_color => (
-        is      => 'rw',
-        traits  => [ 'Slave' ],
-        master  => 'color',
-    );
-    has stroke_color => (
-        is      => 'rw',
-        traits  => [ 'Slave' ],
-        master  => 'line_color',
-    );
-    has border_color => (
-        is      => 'rw',
-        traits  => [ 'Slave' ],
-        master  => 'color',
-        default => 'mauve',
-    );
-}
-
-{
     my $l = Line->new;
 
     is $l->line_color,      'red',      q{Slaves w/o default take master's value};
