@@ -43,9 +43,8 @@ around _inline_get => sub {
 
     my $master  = $self->associated_attribute->master;
     my $name    = $self->associated_attribute->name;
-
     my $code    = sprintf(
-          qq| ( '$master' && !%s->meta->get_attribute('$name')->has_value( %s ) )               |
+          qq| ( '$master' && !%s->meta->find_attribute_by_name('$name')->has_value( %s ) )      |
         . qq|     ? %s->meta->find_attribute_by_name('$master')->get_read_method_ref->( %s )    |
         . qq|     : %s                                                                          |
         . qq|     ;                                                                             |,

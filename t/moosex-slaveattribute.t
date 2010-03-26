@@ -3,7 +3,7 @@ use warnings;
 use lib 't/lib', 'lib';
 
 use Test::Warn;
-use Test::More tests => 11;
+use Test::More tests => 12;
 
 use_ok( 'MooseX::SlaveAttribute' );
 
@@ -36,5 +36,6 @@ use_ok( 'MooseX::SlaveAttribute' );
     my $b = Bar->new;
 
     is $b->background_color, 'red',     q{Slave attributes follow masters in super class};
+    is $b->line_color,      'red',      q{Slave atributes can also be called on a sub class};
 }
 
