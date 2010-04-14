@@ -3,8 +3,6 @@ package MooseX::SlaveAttribute;
 use warnings;
 use strict;
 
-our $VERSION = '0.1';
-
 #--------------------------------------------------------
 package MooseX::SlaveAttribute;
 use Moose::Role;
@@ -61,15 +59,9 @@ package Moose::Meta::Attribute::Custom::Trait::Slave;
 
 sub register_implementation {'MooseX::SlaveAttribute'};
 
+1;
 
-=head1 NAME
-
-MooseX::SlaveAttribute - Let your attributes default to the value of a master attribute.
-
-=head1 VERSION
-
-Version 0.1
-
+# ABSTRACT: Let your Moose attributes default to the value of a master attribute.
 =head1 SYNOPSIS
 
     {
@@ -162,54 +154,8 @@ Masters can also be attributes of a super class:
 =head1 CAVEATS
 
 Don't give slave attributes a default of their own. If you do, your attribute will not be a slave to its master.
-You'll get a warning when you load you class, when you do this, though.
-
-=head1 AUTHOR
-
-Martin Kamerbeek, C<< <mhg at cpan.org> >>
-
-=head1 BUGS
-
-Please report any bugs or feature requests to C<bug-moosex-slaveattribute at rt.cpan.org>, or through
-the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=MooseX-SlaveAttribute>. It will help greatly
-if you attach a small program that reproduces the bug.
-
-=head1 SUPPORT
-
-You can find documentation for this module with the perldoc command.
-
-    perldoc MooseX::SlaveAttribute
-
-You can also look for information at:
-
-=over 4
-
-=item * RT: CPAN's request tracker
-
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=MooseX-SlaveAttribute>
-
-=item * AnnoCPAN: Annotated CPAN documentation
-
-L<http://annocpan.org/dist/MooseX-SlaveAttribute>
-
-=item * CPAN Ratings
-
-L<http://cpanratings.perl.org/d/MooseX-SlaveAttribute>
-
-=item * Search CPAN
-
-L<http://search.cpan.org/dist/MooseX-SlaveAttribute/>
-
-=back
-
-=head1 COPYRIGHT & LICENSE
-
-Copyright 2010 Martin Kamerbeek, all rights reserved.
-
-This program is free software; you can redistribute it and/or modify it
-under the same terms as Perl itself.
+You'll get a warning when you load you class when you do this, though.
 
 =cut
 
-1;
 
