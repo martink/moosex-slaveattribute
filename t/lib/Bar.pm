@@ -4,7 +4,6 @@ use strict;
 use warnings;
 
 use Moose;
-use MooseX::SlaveAttribute;
 
 extends 'Line';
 

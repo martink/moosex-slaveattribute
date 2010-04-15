@@ -3,8 +3,6 @@ package MooseX::SlaveAttribute;
 use warnings;
 use strict;
 
-#--------------------------------------------------------
-package MooseX::SlaveAttribute;
 use Moose::Role;
 use Carp;
 
@@ -32,34 +30,8 @@ around accessor_metaclass => sub {
     )->name;
 };
 
-#--------------------------------------------------------
-package MooseX::SlaveAttribute::Accessor;
-use Moose::Role;
-
-around _inline_get => sub {
-    my ($orig, $self, $instance, $value) = @_;
-
-    my $master  = $self->associated_attribute->master;
-    my $name    = $self->associated_attribute->name;
-    my $code    = sprintf(
-          qq| ( '$master' && !%s->meta->find_attribute_by_name('$name')->has_value( %s ) )      |
-        . qq|     ? %s->meta->find_attribute_by_name('$master')->get_read_method_ref->( %s )    |
-        . qq|     : %s                                                                          |
-        . qq|     ;                                                                             |,
-        $instance, $instance,
-        $instance, $instance,
-        $self->$orig($instance, $value),
-    );
-
-    return $code;
-};
-
-#--------------------------------------------------------
-package Moose::Meta::Attribute::Custom::Trait::Slave;
-
-sub register_implementation {'MooseX::SlaveAttribute'};
-
 1;
+
 
 # ABSTRACT: Let your Moose attributes default to the value of a master attribute.
 =head1 SYNOPSIS

@@ -1,7 +1,6 @@
 package Line;
 
 use Moose;
-use MooseX::SlaveAttribute;
 
 has color => (
     is      => 'rw',
